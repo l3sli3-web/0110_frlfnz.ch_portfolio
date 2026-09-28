@@ -1,0 +1,32 @@
+/* ———————————main content styles——————————— */
+
+main {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+}
+
+.projects {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  align-content: baseline;
+}
+
+.index-project {
+  position: relative;
+  container-type: inline-size;
+}
+
+.project-image {
+  border: 5px solid #F5E600;
+  width: 100%;
+}
+
+/* ———————————small screens———————————— */
+@media (max-width:600px) {
+  .projects {
+    grid-template-columns: 1fr;
+  }
+}

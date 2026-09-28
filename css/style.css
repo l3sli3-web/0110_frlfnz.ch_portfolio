@@ -1,0 +1,213 @@
+:root {
+  --yellow: #F5E600;
+  --black: #000000;
+  --header-h: 20vh;
+  --label-size: 17px;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Marguerite Grotesk";
+  src:
+    local("MargueriteGrotesk-Medium"),
+    url("../src/font/MargueriteGrotesk-Medium.woff2") format("woff2");
+  font-style: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: "Marguerite Grotesk", Arial, sans-serif;
+  background: var(--black);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  min-height: 160px;
+  background: linear-gradient(180deg, var(--yellow) 0%, var(--yellow) 5%, #000000 88%);
+  display: block;
+  pointer-events: none;
+}
+.site-nav {
+  display: grid;
+  grid-template-columns: auto 2fr auto 1fr auto;
+  align-items: center;
+  padding: 50px 20px 20px 20px;
+  font-size: var(--label-size);
+}
+
+
+.site-nav button {
+  font: inherit;
+  color: var(--black);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.nav-home  { grid-column: 1; grid-row: 1; }
+.nav-index { grid-column: 3; grid-row: 1; }
+.nav-about { grid-column: 5; grid-row: 1; }
+
+.logo {
+  grid-column: 1/3;
+  grid-row: 1;
+  position: relative;
+  z-index: 1;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.logo--index{
+  grid-column: 3/5;
+}
+
+.logo-face {
+  position: relative;
+  height: 65%;
+  width: auto;
+  display: block;
+}
+
+.logo-text {
+  font-family: inherit;
+  color: var(--black);
+}
+
+/* ---------- Hero / bouncing smiley ---------- */
+
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bouncer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.smiley {
+  width: 100%;
+  height: auto;
+  display: block;
+  --top: calc((20vw - 100vh) / 2);
+  --bottom: calc((100vh - 20vw) / 2);
+  transform-origin: 50% 100%;      /* Verformung von der Unterkante aus, wie ein Ball auf dem Boden */
+  will-change: transform;
+  animation: ball 1.4s infinite;
+}
+@keyframes ball {
+  0%,100% {
+    transform: translateY(var(--top)) scale(1, 1);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  44% {
+    transform: translateY(var(--bottom)) scale(0.97, 1.08);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: translateY(var(--bottom)) scale(1.05, 0.7);
+    animation-timing-function: ease-in;
+  }
+  56% {
+    transform: translateY(var(--bottom)) scale(0.97, 1.08);
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smiley {
+    animation: none;
+  }
+}
+/* ---------- Small screens ---------- */
+
+@media (max-width: 640px) {
+  .site-nav {
+    gap: 24px;
+  }
+  
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bouncer {
+    transition: none;
+  }
+}
+/* ---------- titles-projects ---------- */
+.index-titles {
+  display: flex;
+  align-items: baseline;
+  gap: 10em;
+  position: absolute;
+  z-index: 1;
+  background: var(--yellow);
+  bottom: 0px;
+  left: 0px;
+  padding: 0.1em 2em 0.1em 0.1em; 
+}
+
+.project-info h2,
+.project-info p,
+.project-info time,
+.project-info dl,
+.project-info dd,
+.index-titles h2,
+.index-titles p,
+.index-titles time {
+  margin: 0;
+  font: inherit;
+  font-size: var(--label-size);           /* gleiche Schrift, Größe, Stärke und Zeilenhöhe wie .index-titles */
+}
+
+.project-info {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;   /* breite Textspalte + zwei schmale, wie in Figma */
+  column-gap: 1em;
+  row-gap: 0.6em;
+  width: 55%;
+  margin-top: -1.5em;                    /* zieht die Titelzeile auf die Bildunterkante */
+  padding: 0.3em 2em 1.5em 0.4em;
+  background: var(--yellow);
+  font-size: var(--label-size);
+  line-height: 1.1;
+}
+
+.project-meta {
+  grid-column: 2 / 4;                   /* Spalte 2 und 3 */
+  display: grid;
+  grid-template-columns: subgrid;       /* übernimmt die Spalten des äußeren Rasters */
+  row-gap: 1em;
+  align-content: start;
+}
+
+.project-meta a {
+  color: inherit;
+  text-decoration: underline;
+}
