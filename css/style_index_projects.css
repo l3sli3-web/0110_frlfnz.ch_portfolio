@@ -2,14 +2,10 @@
 
 main {
   width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
 }
 
 .projects {
   width: 100vw;
-  padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
@@ -17,11 +13,13 @@ main {
 }
 
 .index-project {
-    border: 0px solid var(--yellow);
   position: relative;
   container-type: inline-size;
   display: flex;
   justify-content: center;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  transition: outline-color 0.2s;
 }
 
 .project-image {
@@ -34,22 +32,17 @@ main {
     transition: opacity 0.2s;
   }
 
-  .project-image {
+  /* .project-image {
     filter: blur(7px);
-    transition: filter 0.3s;
-  }
-  .index-project:hover {
-    border: 1px solid var(--yellow);
+  } */
+  .index-project:hover,
+  .index-project:focus-visible {
+  outline-color: var(--yellow);   
   }
 
   .index-project:hover .index-titles,
   .index-project:focus-visible .index-titles {
     opacity: 1;
-  }
-
-  .index-project:hover .project-image,
-  .index-project:focus-visible .project-image {
-    filter: blur(0);
   }
 }
 
